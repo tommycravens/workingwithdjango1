@@ -14,7 +14,7 @@ class QuestionAdmin(admin.ModelAdmin):
         ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
     ]
     inlines = [ChoiceInline]
-    list_display = ('question_text', 'pub_date', 'was_published_recently')
+    list_display = ('question_text', 'pub_date','was_published_recently')
     @admin.display(
         boolean=True,
         ordering='pub_date',
@@ -23,6 +23,5 @@ class QuestionAdmin(admin.ModelAdmin):
     def was_published_recently(self):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
-
 
 admin.site.register(Question, QuestionAdmin)
